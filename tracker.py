@@ -3,7 +3,7 @@ from gps3.agps3threaded import AGPS3mechanism
 import time
 import os
 from measurement.measures import Distance
-import round
+
 
 
 agps_thread = AGPS3mechanism()  
