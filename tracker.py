@@ -3,7 +3,7 @@ from gps3.agps3threaded import AGPS3mechanism
 import time
 import os
 from measurement.measures import Distance
-
+import round
 
 
 agps_thread = AGPS3mechanism()  
@@ -13,7 +13,7 @@ agps_thread.run_thread()
 
 
 while 1:
-           	callsign = DL3KB #change to your callsign
+                callsign = DL3KB #change to your callsign
                 
                 
                 time.sleep(90) #change to your prefered interval
@@ -43,30 +43,20 @@ while 1:
                 lonmm = '{:02d}'.format(round(int(minuteslon)))
                 lonhh = '{:02d}'.format(round(int(secondslon)))
 
-        	if dlon > 0.0:
-            	orient_lon = 'E'
-        	if dlon < 0.0:
-            	orient_lon = 'W'
-
-        	if dlat > 0.0:
-            	orient_lat = 'N'
-        	if dlat < 0.0:
-		orient_lat = 'S'
-
                 speedkm = (agps_thread.data_stream.speed)
                 knot3digits = '{:03d}'.format(round(int(0.539957 * speedkm)))
-		course = agps_thread.data_stream.track
+				        course = agps_thread.data_stream.track
 
                 lat = '{}{}.{}'.format(latdd, latmm, lathh)
                 lon = '{}{}.{}'.format(londd, lonmm, lonhh)
                 altgps = agps_thread.data_stream.alt
                 alt = int(Distance(m=altgps).ft)
                 alt6digits = '{:06d}'.format(round(alt))
-                aprs = 'aprs -c {} -o packet.wav "!{}{}/{}{}>{}/{}/A={}"'.format(callsign,lat,orient_lat,lon,orient_lon,course,knot3digits,alt6digits) #I saved the audio into a file, because the pi had some problems with the audio playback
+                aprs = 'aprs -c {} -o packet.wav "!{}N/{}E>{}/{}/A={}"'.format(callsign,lat,lon,course,knot3digits,alt6digits) #I saved the audio into a file, because the pi had some problems with the audio playback
                 print aprs
                 os.system (aprs)
-                aplay = 'sudo aplay -D plughw:0,0 packet.wav' #select your sounddevice
+                aplay = 'sudo aplay -D plughw:0,0 packet.wav' 
                 os.system (aplay) #play the aduio file
                 
         except KeyboardInterrupt:
-                break
+break
