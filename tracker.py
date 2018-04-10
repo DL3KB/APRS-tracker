@@ -3,7 +3,7 @@ from gps3.agps3threaded import AGPS3mechanism
 import time
 import os
 from measurement.measures import Distance
-import round
+
 
 
 agps_thread = AGPS3mechanism()  
@@ -13,7 +13,7 @@ agps_thread.run_thread()
 
 
 while 1:
-                callsign = DL3KB #change to your callsign
+                callsign = "DL3KB" #change to your callsign
                 
                 
                 time.sleep(90) #change to your prefered interval
@@ -56,7 +56,6 @@ while 1:
                 print aprs
                 os.system (aprs)
                 aplay = 'sudo aplay -D plughw:0,0 packet.wav' 
-                os.system (aplay) #play the aduio file
+                os.system (aplay) #play the audio file
                 
-        except KeyboardInterrupt:
-break
+
