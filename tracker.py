@@ -53,6 +53,19 @@ while 1:
 	londd = '{:03d}'.format(intlondd)
 	lonmm = '{:02d}'.format(intlonmm)
 	lonhh = '{:02d}'.format(intlonhhdec)
+	
+	
+	if dlon > 0.0:
+	orient_lon = 'E'
+	if dlon < 0.0:
+	orient_lon = 'W'
+	
+	if dlat > 0.0:
+	orient_lat = 'N'
+	if dlat < 0.0:
+	orient_lat = 'S'
+	
+	
 	 
 
 	speedkm = (agps_thread.data_stream.speed)
@@ -66,7 +79,7 @@ while 1:
 	alt = int(Distance(m=altgps).ft)
 	intalt = int (round(alt))
 	alt6digits = '{:06d}'.format(intalt)
-	aprs = 'aprs -c {} -o packet.wav "!{}N/{}E>{}/{}/A={}"'.format(callsign,lat,lon,course,knot3digits,alt6digits) #I saved the audio into a file, because the pi had some problems with the audio playback
+	aprs = 'aprs -c {} -o packet.wav "!{}{}/{}{}>{}/{}/A={}"'.format(callsign,lat,orient_lat,lon,orient_lon,course,knot3digits,alt6digits) #I saved the audio into a file, because the pi had some problems with the audio playback
 	os.system (aprs)
 	aplay = 'sudo aplay -D plughw:0,0 packet.wav'
 	os.system (aplay) #play the audio file
