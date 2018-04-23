@@ -37,8 +37,8 @@ while 1:
 
 	intlatdd = int(round(degreeslat))
 	intlatmm = int(round(minuteslat))
-	intlathh = (round(secondslat))
-	intlathhdec = int ((intlathh/60)*100)
+	intlathh = round ((secondslat/60)*100)
+	intlonhhdec = int (intlathh)
 	latdd = '{:02d}'.format(intlatdd)
 	latmm = '{:02d}'.format(intlatmm)
 	lathh = '{:02d}'.format(intlathhdec)
@@ -48,8 +48,8 @@ while 1:
 
 	intlondd = int(round(degreeslon))
 	intlonmm = int(round(minuteslon))
-	intlonhh = (round(secondslon))
-	intlonhhdec = int ((intlonhh/60)*100)
+	intlonhh = round ((secondslon/60)*100)
+	intlonhhdec = int (intlonhh)
 	londd = '{:03d}'.format(intlondd)
 	lonmm = '{:02d}'.format(intlonmm)
 	lonhh = '{:02d}'.format(intlonhhdec)
